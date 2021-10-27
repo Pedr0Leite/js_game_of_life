@@ -58,13 +58,20 @@ function draw() {
       let sum = 0;
       let neighors = countNeighors(grid, i, j);
 
+      /* RULES 
+    If a dead cell has exactly three live neighbours, it comes to life
+    If a live cell has less than two live neighbours, it dies
+    If a live cell has more than three live neighbours, it dies
+    If a live cell has two or three live neighbours, it continues living
+     */
+
       //First rule - So se reproduz se tiver 3 vizinhos
       if (state == 0 && neighors == 3) {
         next[i][j] = 1;
-        //Second rule - Morre se tiver menos de dois e mais de 3
+        //Second and Third rule - Morre se tiver menos de dois e mais de 3
       } else if (state == 1 && (neighors < 2 || neighors > 3)) {
         next[i][j] = 0;
-        //third rule
+        //Forth rule
       } else {
         next[i][j] = state;
       }
@@ -106,3 +113,5 @@ function countNeighors(grid, x, y) {
   sum -= grid[x][y];
   return sum;
 }
+
+
